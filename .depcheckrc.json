@@ -4,7 +4,6 @@
     "@virtualpatterns/mablung-*",
     "babel-*",
     "eslint-*",
-    "html-to-vdom",
-    "source-map-support"
+    "html-to-vdom"
   ]
 }
