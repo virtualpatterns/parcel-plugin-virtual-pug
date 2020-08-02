@@ -1,50 +1,52 @@
-"use strict";
+import { createRequire as _createRequire } from "module";import _URL from "url";import Bundler from 'parcel-bundler';
+import CreateRealContent from 'virtual-dom/create-element.js';
+import Format from 'pretty';
+import Path from 'path';
+import Pug from 'pug';
+import Test from 'ava';
 
-var _parcelBundler = _interopRequireDefault(require("parcel-bundler"));
+import Plugin from '../../index.js';
 
-var _createElement = _interopRequireDefault(require("virtual-dom/create-element.js"));
+const FilePath = _URL.fileURLToPath(import.meta.url);
+const FolderPath = Path.dirname(FilePath);
+const Require = _createRequire(import.meta.url);
 
-var _pretty = _interopRequireDefault(require("pretty"));
+Test('Bundler(Require.resolve(\'./source/source.js\'), { ... })', async test => {
 
-var _pug = _interopRequireDefault(require("pug"));
-
-var _ava = _interopRequireDefault(require("ava"));
-
-var _index = _interopRequireDefault(require("../../index.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-(0, _ava.default)('Bundler(require.resolve(\'./source/source.js\'), { ... })', async test => {
-  let bundler = new _parcelBundler.default(require.resolve('./source/source.js'), {
+  let bundler = new Bundler(Require.resolve('./source/source.js'), {
     'cache': false,
-    'outDir': `${__dirname}/target`,
-    'outFile': 'target.js',
+    'outDir': `${FolderPath}/target`,
+    'outFile': 'target.cjs',
     'target': 'node',
     'watch': false,
-    'logLevel': 2
-  });
-  await (0, _index.default)(bundler);
+    'logLevel': 0 });
+
+
+  await Plugin(bundler);
   await bundler.bundle();
-  let local = {
-    'name': 'Bob'
-  };
-  let {
-    default: virtualContentFn
-  } = await Promise.resolve(`${require.resolve('./target/target.js')}`).then(s => _interopRequireWildcard(require(s)));
+
+  // bundle produces CommonJS which import loads as ESModule ... which fails
+
+  let local = { 'name': 'Bob' };
+
+  let module = await import(Require.resolve('./target/target.cjs'));
+  let virtualContentFn = module.default.default;
+
   let virtualContent = null;
   virtualContent = virtualContentFn(local);
-  virtualContent = virtualContent.map(virtualContent => (0, _createElement.default)(virtualContent)).map(realContent => realContent.toString()).join('\n');
-  virtualContent = (0, _pretty.default)(virtualContent);
-  test.log(virtualContent);
+  virtualContent = virtualContent.
+  map(virtualContent => CreateRealContent(virtualContent)).
+  map(realContent => realContent.toString()).
+  join('\n');
 
-  let realContentFn = _pug.default.compileFile(require.resolve('./source/source.pug'));
+  virtualContent = Format(virtualContent);
 
-  let realContent = (0, _pretty.default)(realContentFn(local));
-  test.log(realContent);
+  let realContentFn = Pug.compileFile(Require.resolve('./source/source.pug'));
+  let realContent = Format(realContentFn(local));
+
+  test.log(`virtualContent = ${virtualContent}`);
+  test.log(`   realContent = ${realContent}`);
   test.is(virtualContent, realContent);
+
 });
 //# sourceMappingURL=asset.test.js.map

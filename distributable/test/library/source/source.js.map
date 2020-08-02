@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../../../source/test/library/source/source.js"],"names":[],"mappings":";;;;;;;;;;;;AAAA","sourcesContent":["import ContentFn from './source.pug'\nexport { ContentFn as default }\n"],"file":"source.js"}
+{"version":3,"sources":["../../../../source/test/library/source/source.js"],"names":["ContentFn","default"],"mappings":"AAAA,OAAOA,SAAP,MAAsB,cAAtB;AACA,SAASA,SAAS,IAAIC,OAAtB","sourcesContent":["import ContentFn from './source.pug'\nexport { ContentFn as default }\n"],"file":"source.js"}
