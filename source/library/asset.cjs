@@ -1,6 +1,13 @@
 import { Asset as BaseAsset } from 'parcel-bundler'
-// import Path from 'path'
+import FileSystem from 'fs-extra'
+import JSON5 from 'json5'
+import Path from 'path'
 import { Transform } from '@virtualpatterns/mablung-virtual-pug'
+
+const FilePath = __filePath
+const Require = __require
+
+const Package = JSON5.parse(FileSystem.readFileSync(Require.resolve('../../package.json'), { 'encoding': 'utf-8' }))
 
 class Asset extends BaseAsset {
 
@@ -10,7 +17,6 @@ class Asset extends BaseAsset {
   }
 
   async generate() {
-    // console.log(`Asset.generate() this.name = '${Path.relative('', this.name)}'`)
 
     let source = null
     source = await Transform.getFunctionSourceFromContent(this.contents, { 'path': this.name })
@@ -21,6 +27,8 @@ class Asset extends BaseAsset {
                 const ConvertToVirtualNode = _ConvertToVirtualNode({ 'VNode': VirtualNode, 'VText': VirtualText })
                 ${source}
                 export default function(__local = {}, __option = { 'createNode': CreateVirtualNode, 'convertToNode': ConvertToVirtualNode }) { 
+                  // Powered by ${Package.name} v${Package.version}
+                  // FilePath = '${Path.relative('', FilePath)}'
                   return __getNode(__local, __option) 
                 }`
             
@@ -35,4 +43,5 @@ class Asset extends BaseAsset {
 
 }
 
+// export default Asset
 module.exports = Asset

@@ -10,7 +10,7 @@
       "name": "Launch ...",
       "internalConsoleOptions": "openOnSessionStart",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/distributable/sandbox/boobs.js",
+      "program": "${workspaceFolder}/distributable/sandbox/main.js",
       "runtimeArgs": [],
       "skipFiles": [ "<node_internals>/**" ]
     },

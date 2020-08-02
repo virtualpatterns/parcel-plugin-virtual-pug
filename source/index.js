@@ -1,4 +1,6 @@
+const Require = __require
 
-module.exports = function(bundler) {
-  bundler.addAssetType('pug', require.resolve('./library/asset.js'))
+// export default 
+export default function(bundler) {
+  bundler.addAssetType('pug', Require.resolve('./library/asset.cjs'))
 }

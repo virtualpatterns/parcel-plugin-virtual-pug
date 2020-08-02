@@ -1,27 +1,36 @@
 import Bundler from 'parcel-bundler'
 import CreateRealContent from 'virtual-dom/create-element.js'
 import Format from 'pretty'
+import Path from 'path'
 import Pug from 'pug'
 import Test from 'ava'
 
 import Plugin from '../../index.js'
 
-Test('Bundler(require.resolve(\'./source/source.js\'), { ... })', async (test) => {
+const FilePath = __filePath
+const FolderPath = Path.dirname(FilePath)
+const Require = __require
 
-  let bundler = new Bundler(require.resolve('./source/source.js'), {
+Test('Bundler(Require.resolve(\'./source/source.js\'), { ... })', async (test) => {
+
+  let bundler = new Bundler(Require.resolve('./source/source.js'), {
     'cache': false,
-    'outDir': `${__dirname}/target`,
-    'outFile': 'target.js',
+    'outDir': `${FolderPath}/target`,
+    'outFile': 'target.cjs',
     'target': 'node',
     'watch': false,
-    'logLevel': 2
+    'logLevel': 0
   })
 
   await Plugin(bundler)
   await bundler.bundle()
+
+  // bundle produces CommonJS which import loads as ESModule ... which fails
   
   let local = { 'name': 'Bob' }
-  let { default: virtualContentFn } = await import(require.resolve('./target/target.js'))
+
+  let module = await import(Require.resolve('./target/target.cjs'))
+  let virtualContentFn = module.default.default
 
   let virtualContent = null
   virtualContent = virtualContentFn(local)
@@ -32,13 +41,11 @@ Test('Bundler(require.resolve(\'./source/source.js\'), { ... })', async (test) =
 
   virtualContent = Format(virtualContent)
 
-  test.log(virtualContent)
-
-  let realContentFn = Pug.compileFile(require.resolve('./source/source.pug'))
+  let realContentFn = Pug.compileFile(Require.resolve('./source/source.pug'))
   let realContent = Format(realContentFn(local))
 
-  test.log(realContent)
-
+  test.log(`virtualContent = ${virtualContent}`)
+  test.log(`   realContent = ${realContent}`)
   test.is(virtualContent, realContent)
 
 })

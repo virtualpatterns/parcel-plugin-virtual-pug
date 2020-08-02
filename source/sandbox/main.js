@@ -1,20 +1,22 @@
 import Bundler from 'parcel-bundler'
-import Source from 'source-map-support'
+import Path from 'path'
 
 import Plugin from '../index.js'
 
-Source.install({ 'environment': 'node', 'handleUncaughtExceptions': false, 'hookRequire': false })
+const FilePath = __filePath
+const FolderPath = Path.dirname(FilePath)
+const Require = __require
 
 async function main() {
 
   try {
 
-    let bundler = new Bundler(require.resolve('./source/main.js'), {
+    let bundler = new Bundler(Require.resolve('../../source/sandbox/source/main.js'), {
       'cache': false,
-      'outDir': `${__dirname}/target`,
+      'outDir': `${FolderPath}/target`,
       'target': 'node',
       'watch': false,
-      'logLevel': 2
+      'logLevel': 3
     })
 
     await Plugin(bundler)

@@ -1,16 +1,82 @@
 {
-  "plugins": [
-    "@babel/plugin-proposal-export-default-from"
-  ],
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": { 
-          "node": "current" 
-        }
-      }
-    ]
-  ],
-  "sourceType": "module"
+  "env": {
+    "commonjs": {
+      "plugins": [
+        "@babel/plugin-proposal-export-default-from",
+        [
+          "@virtualpatterns/mablung-babel-plugin-replace-identifier",
+          {
+            "rule": [
+              {
+                "searchFor": "__filePath",
+                "replaceWith": "__filename"
+              },
+              {
+                "searchFor": "__require",
+                "replaceWith": "require"
+              }
+            ]
+          }
+        ]
+      ],
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": { 
+              "node": "current" 
+            } 
+          }
+        ]
+      ],
+      "sourceType": "module"
+    },
+    "esmodule": {
+      "plugins": [
+        "@babel/plugin-syntax-import-meta",
+        [
+          "@virtualpatterns/mablung-babel-plugin-replace-identifier",
+          {
+            "rule": [
+              {
+                "searchFor": "__filePath",
+                "replaceWith": "__importIdentifier.fileURLToPath(import.meta.url)",
+                "parserOption": { 
+                  "plugins": [ "importMeta" ], 
+                  "sourceType": "module" 
+                },
+                "addImport": [
+                  {
+                    "type": "default",
+                    "source": "url",
+                    "option": {
+                      "nameHint": "URL"
+                    }
+                  }
+                ]
+              },
+              {
+                "searchFor": "__require",
+                "replaceWith": "__importIdentifier(import.meta.url)",
+                "parserOption": { 
+                  "plugins": [ "importMeta" ], 
+                  "sourceType": "module" 
+                },
+                "addImport": [
+                  {
+                    "type": "named",
+                    "name": "createRequire",
+                    "source": "module"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      ],
+      "presets": [],
+      "retainLines": true,
+      "sourceType": "module"
+    }
+  }
 }
