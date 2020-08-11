@@ -19,7 +19,7 @@ Test('Bundler(Require.resolve(\'./source/source.js\'), { ... })', async (test) =
     'outFile': 'target.cjs',
     'target': 'node',
     'watch': false,
-    'logLevel': 0
+    'logLevel': 4
   })
 
   await Plugin(bundler)
