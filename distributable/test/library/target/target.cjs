@@ -145,7 +145,7 @@ const ConvertToVirtualNode = (0, _htmlToVdom.default)({
 });
 
 function __getNode(__local = {}, __option = {}) {
-  // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-6
+  // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-7
   // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
   const {
     name
@@ -200,7 +200,7 @@ function __getNode(__local = {}, __option = {}) {
   }
 
   function __getNode(__option = {}) {
-    // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-6
+    // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-7
     // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
     const __node = [];
 
@@ -234,7 +234,7 @@ function _default(__local = {}, __option = {
   createNode: _h.default,
   convertToNode: ConvertToVirtualNode
 }) {
-  // Powered by @virtualpatterns/parcel-plugin-virtual-pug v0.0.1-1
+  // Powered by @virtualpatterns/parcel-plugin-virtual-pug v0.0.1-2
   // FilePath = 'distributable/library/asset.cjs'
   return __getNode(__local, __option);
 }

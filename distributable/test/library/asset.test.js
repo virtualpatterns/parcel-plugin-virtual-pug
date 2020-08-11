@@ -19,7 +19,7 @@ Test('Bundler(Require.resolve(\'./source/source.js\'), { ... })', async test => 
     'outFile': 'target.cjs',
     'target': 'node',
     'watch': false,
-    'logLevel': 0 });
+    'logLevel': 5 });
 
 
   await Plugin(bundler);
@@ -30,6 +30,9 @@ Test('Bundler(Require.resolve(\'./source/source.js\'), { ... })', async test => 
   let local = { 'name': 'Bob' };
 
   let module = await import(Require.resolve('./target/target.cjs'));
+  let a = module.default;
+  let b = module.default.default;
+  debugger;
   let virtualContentFn = module.default.default;
 
   let virtualContent = null;
