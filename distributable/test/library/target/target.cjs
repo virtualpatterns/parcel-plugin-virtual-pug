@@ -234,7 +234,7 @@ function _default(__local = {}, __option = {
   createNode: _h.default,
   convertToNode: ConvertToVirtualNode
 }) {
-  // Powered by @virtualpatterns/parcel-plugin-virtual-pug v0.0.1-2
+  // Powered by @virtualpatterns/parcel-plugin-virtual-pug v0.0.1-3
   // FilePath = 'distributable/library/asset.cjs'
   return __getNode(__local, __option);
 }
