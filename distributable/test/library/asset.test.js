@@ -5,7 +5,7 @@ import Path from 'path';
 import Pug from 'pug';
 import Test from 'ava';
 
-import Plugin from '../../index.js';
+import Plugin from '../../index.cjs';
 
 const FilePath = _URL.fileURLToPath(import.meta.url);
 const FolderPath = Path.dirname(FilePath);
