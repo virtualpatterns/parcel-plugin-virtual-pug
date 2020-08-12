@@ -10,7 +10,21 @@ var _path = _interopRequireDefault(require("path"));
 
 var _mablungVirtualPug = require("@virtualpatterns/mablung-virtual-pug");
 
+var _h = _interopRequireDefault(require("virtual-dom/h.js"));
+
+var _htmlToVdom = _interopRequireDefault(require("html-to-vdom"));
+
+var _vnode = _interopRequireDefault(require("virtual-dom/vnode/vnode.js"));
+
+var _vtext = _interopRequireDefault(require("virtual-dom/vnode/vtext.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// used in source below
+const ConvertToVirtualNode = (0, _htmlToVdom.default)({
+  'VNode': _vnode.default,
+  'VText': _vtext.default
+}); // used in source below
 
 const FilePath = __filename;
 const Require = require;
