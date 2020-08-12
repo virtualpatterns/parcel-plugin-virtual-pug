@@ -28,6 +28,7 @@
     "./package.json": "./package.json"
   },
   "license": "GPL-3.0+",
+  "main": "./distributable/index.cjs",
   "name": "@virtualpatterns/parcel-plugin-virtual-pug",
   "repository": {
     "type": "git",

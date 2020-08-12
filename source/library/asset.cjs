@@ -4,6 +4,14 @@ import JSON5 from 'json5'
 import Path from 'path'
 import { Transform } from '@virtualpatterns/mablung-virtual-pug'
 
+// used in source below
+import CreateVirtualNode from 'virtual-dom/h.js'
+import _ConvertToVirtualNode from 'html-to-vdom'
+import VirtualNode from 'virtual-dom/vnode/vnode.js'
+import VirtualText from 'virtual-dom/vnode/vtext.js'
+const ConvertToVirtualNode = _ConvertToVirtualNode({ 'VNode': VirtualNode, 'VText': VirtualText })
+// used in source below
+
 const FilePath = __filePath
 const Require = __require
 
