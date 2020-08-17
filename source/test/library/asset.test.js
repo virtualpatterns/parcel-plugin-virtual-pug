@@ -4,6 +4,7 @@ import Format from 'pretty'
 import Path from 'path'
 import Pug from 'pug'
 import Test from 'ava'
+import URL from 'url'
 
 import Plugin from '../../index.cjs'
 
@@ -29,7 +30,7 @@ Test('Bundler(Require.resolve(\'./source/source.js\'), { ... })', async (test) =
   
   let local = { 'name': 'Bob' }
 
-  let module = await import(Require.resolve('./target/target.cjs'))
+  let module = await import(URL.pathToFileURL(Require.resolve('./target/target.cjs')))
   let virtualContentFn = module.default.default
 
   let virtualContent = null
