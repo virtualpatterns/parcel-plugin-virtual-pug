@@ -145,7 +145,7 @@ const ConvertToVirtualNode = (0, _htmlToVdom.default)({
 });
 
 function __getNode(__local = {}, __option = {}) {
-  // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-9
+  // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-10
   // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
   const {
     name
@@ -217,7 +217,7 @@ function __getNode(__local = {}, __option = {}) {
     entry.sort(([leftName], [rightName]) => leftName.localeCompare(rightName)).forEach(([name, value]) => {
       if (name.toUpperCase() in map) {
         delete property[name];
-        property[map[name] || name] = value;
+        property[map[name.toUpperCase()] || name] = value;
       }
     });
     return property;
@@ -238,7 +238,7 @@ function __getNode(__local = {}, __option = {}) {
   }
 
   function __getNode(__option = {}) {
-    // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-9
+    // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-10
     // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
     const __node = [];
 
@@ -272,7 +272,7 @@ function _default(__local = {}, __option = {
   createNode: _h.default,
   convertToNode: ConvertToVirtualNode
 }) {
-  // Powered by @virtualpatterns/parcel-plugin-virtual-pug v0.0.1-8
+  // Powered by @virtualpatterns/parcel-plugin-virtual-pug v0.0.1-9
   // FilePath = 'distributable/library/asset.cjs'
   return __getNode(__local, __option);
 }
