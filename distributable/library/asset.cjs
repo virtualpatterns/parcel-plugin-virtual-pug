@@ -41,21 +41,21 @@ class Asset extends _parcelBundler.Asset {
 
   async generate() {
     let source = null;
-    source = await _mablungVirtualPug.Transform.getFunctionSourceFromContent(this.contents, {
+    source = await _mablungVirtualPug.Transform.getModuleSourceFromContent(this.contents, {
       'path': this.name
-    });
-    source = ` import CreateVirtualNode from 'virtual-dom/h.js'
-                import _ConvertToVirtualNode from 'html-to-vdom'
-                import VirtualNode from 'virtual-dom/vnode/vnode.js'
-                import VirtualText from 'virtual-dom/vnode/vtext.js'
-                const ConvertToVirtualNode = _ConvertToVirtualNode({ 'VNode': VirtualNode, 'VText': VirtualText })
-                ${source}
-                export default function(__local = {}, __option = { 'createNode': CreateVirtualNode, 'convertToNode': ConvertToVirtualNode }) { 
-                  // Powered by ${Package.name} v${Package.version}
-                  // FilePath = '${_path.default.relative('', FilePath)}'
-                  return __getNode(__local, __option) 
-                }`;
-    source = await _mablungVirtualPug.Transform.formatSource(source);
+    }); // source =  ` import CreateVirtualNode from 'virtual-dom/h.js'
+    //             import _ConvertToVirtualNode from 'html-to-vdom'
+    //             import VirtualNode from 'virtual-dom/vnode/vnode.js'
+    //             import VirtualText from 'virtual-dom/vnode/vtext.js'
+    //             const ConvertToVirtualNode = _ConvertToVirtualNode({ 'VNode': VirtualNode, 'VText': VirtualText })
+    //             ${source}
+    //             export default function(__local = {}, __option = { 'createNode': CreateVirtualNode, 'convertToNode': ConvertToVirtualNode }) { 
+    //               // Powered by ${Package.name} v${Package.version}
+    //               // FilePath = '${Path.relative('', FilePath)}'
+    //               return __getNode(__local, __option) 
+    //             }`
+
+    source = await _mablungVirtualPug.Transform.formatSource(source, 'esmodule');
     return [{
       'type': 'js',
       'value': source

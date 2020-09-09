@@ -118,26 +118,22 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"source.pug":[function(require,module,exports) {
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
 
-var _h = _interopRequireDefault(require('virtual-dom/h.js'));
+var _h = _interopRequireDefault(require("virtual-dom/h.js"));
 
-var _htmlToVdom = _interopRequireDefault(require('html-to-vdom'));
+var _htmlToVdom = _interopRequireDefault(require("html-to-vdom"));
 
-var _vnode = _interopRequireDefault(require('virtual-dom/vnode/vnode.js'));
+var _vnode = _interopRequireDefault(require("virtual-dom/vnode/vnode.js"));
 
-var _vtext = _interopRequireDefault(require('virtual-dom/vnode/vtext.js'));
+var _vtext = _interopRequireDefault(require("virtual-dom/vnode/vtext.js"));
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const ConvertToVirtualNode = (0, _htmlToVdom.default)({
   VNode: _vnode.default,
@@ -145,7 +141,7 @@ const ConvertToVirtualNode = (0, _htmlToVdom.default)({
 });
 
 function __getNode(__local = {}, __option = {}) {
-  // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-10
+  // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-11
   // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
   const {
     name
@@ -210,9 +206,8 @@ function __getNode(__local = {}, __option = {}) {
   }
 
   function __getNodeProperty(property) {
-    let map = {
-      CLASS: 'className'
-    };
+    let map = {}; // { 'CLASS': 'className', 'FOR': 'htmlFor', 'HTTP-EQUIV': 'httpEquiv' }
+
     let entry = Object.entries(property);
     entry.sort(([leftName], [rightName]) => leftName.localeCompare(rightName)).forEach(([name, value]) => {
       if (name.toUpperCase() in map) {
@@ -234,11 +229,13 @@ function __getNode(__local = {}, __option = {}) {
 
     childNode = __getChildNode(childNode); // eslint-disable-line no-undef
 
-    return createNodeFn(name, property, childNode);
+    return createNodeFn(name, {
+      attributes: property
+    }, childNode);
   }
 
   function __getNode(__option = {}) {
-    // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-10
+    // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-11
     // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
     const __node = [];
 
@@ -272,8 +269,8 @@ function _default(__local = {}, __option = {
   createNode: _h.default,
   convertToNode: ConvertToVirtualNode
 }) {
-  // Powered by @virtualpatterns/parcel-plugin-virtual-pug v0.0.1-9
-  // FilePath = 'distributable/library/asset.cjs'
+  // Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-11
+  // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
   return __getNode(__local, __option);
 }
 },{}],"source.js":[function(require,module,exports) {
