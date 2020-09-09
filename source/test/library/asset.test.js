@@ -25,8 +25,6 @@ Test('Bundler(Require.resolve(\'./source/source.js\'), { ... })', async (test) =
 
   await Plugin(bundler)
   await bundler.bundle()
-
-  // bundle produces CommonJS which import loads as ESModule ... which fails
   
   let local = { 'name': 'Bob' }
 
