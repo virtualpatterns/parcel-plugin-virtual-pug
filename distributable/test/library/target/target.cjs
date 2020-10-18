@@ -135,7 +135,7 @@ var _vtext = _interopRequireDefault(require("virtual-dom/vnode/vtext.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-12
+// Powered by @virtualpatterns/mablung-virtual-pug v0.0.1-13
 // FilePath = 'node_modules/@virtualpatterns/mablung-virtual-pug/distributable-commonjs/library/transform.cjs'
 const ConvertToVirtualNode = (0, _htmlToVdom.default)({
   VNode: _vnode.default,
